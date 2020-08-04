@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 
 const MainNav = () => {
+  
+
   return (
     <>
       <Navbar fixed="top" className="navbar" expand="lg">
