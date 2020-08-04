@@ -4,14 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MainNav from './Navbar';
 import Sidebar from './Sidebar';
-import Cards from './Cards/Cards'
+import MovieCards from './Components/MovieCards/MovieCards'
 
 const App = () => {
   return (
     <>
       <MainNav />
       <Sidebar />
-      <Cards />
+      <MovieCards />
     </>
   );
 } 

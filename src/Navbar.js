@@ -6,7 +6,7 @@ const MainNav = () => {
   return (
     <>
       <Navbar className="navbar" expand="lg">
-        <Navbar.Brand href="#home">Movie Search</Navbar.Brand>
+        <Navbar.Brand href="#home">Movie Finder</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">

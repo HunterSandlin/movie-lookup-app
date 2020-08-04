@@ -1,12 +1,12 @@
 import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Sidebar = () => {
+const MovieCard = () => {
   return (
-    <div className="sidenav">
-      
+    <div>
+      <p>Movie Card</p>
     </div>
-  );
+  )
 }
 
-export default Sidebar;
+export default MovieCard;
