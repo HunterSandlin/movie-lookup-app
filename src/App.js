@@ -20,7 +20,7 @@ const App = () => {
     </Navbar.Collapse>
   </Navbar>
   <Sidebar />
-  <CardTest />
+  <h1 className="body">Hello World</h1>
   </>
   );
 }
@@ -44,7 +44,7 @@ const CardTest = () => {
   return (
     <h1>{card.toString()}</h1>
   );
-}
+} 
 
 
 
