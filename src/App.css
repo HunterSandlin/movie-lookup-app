@@ -19,3 +19,9 @@
   .sidenav {padding-top: 15px; width: 100px}
   .sidenav a {font-size: 18px;}
 }
+
+.card {
+  margin: 20px;
+  float: left;
+  width: 18rem;
+}
