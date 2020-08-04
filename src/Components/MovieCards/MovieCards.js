@@ -6,7 +6,7 @@ import MovieCard from './MovieCard/MovieCard'
 const MovieCards = () => {
   return (
     <div className='body'>
-      <MovieCard 
+      <MovieCard
         title="Donnie Darko" 
         year="2001" 
         description= "During the presidential election of 1988, a teenager named Donnie Darko..."

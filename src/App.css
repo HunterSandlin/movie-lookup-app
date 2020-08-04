@@ -15,6 +15,9 @@
 .body {
   padding-top: 70px;
   padding-left: 260px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 /* On smaller screens (height is less than 450px) change the style of the sidebar*/
@@ -26,5 +29,5 @@
 .card {
   margin: 20px;
   float: left;
-  width: 18rem;
+  max-width: 22rem;
 }
