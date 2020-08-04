@@ -5,17 +5,17 @@
 .sidenav {
   height: 100%; 
   width: 250px; 
-  position: fixed; 
-  z-index: 1; 
-  top: auto; 
-  left: 0;
-  background-color: #ececec;
-  overflow-x: hidden; 
   padding-top: 20px;
+  position: fixed; 
+  background-color: #ececec;
+}
+
+.body {
+  padding-left: 260px;
 }
 
 /* On smaller screens (height is less than 450px) change the style of the sidebar*/
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
+  .sidenav {padding-top: 15px; width: 100px}
   .sidenav a {font-size: 18px;}
 }
