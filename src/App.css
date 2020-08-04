@@ -1,4 +1,6 @@
 .navbar {
+  top: 0;
+  position: sticky;
   background-color: #f3f2f2;
 }
 
@@ -11,6 +13,7 @@
 }
 
 .body {
+  padding-top: 70px;
   padding-left: 260px;
 }
 

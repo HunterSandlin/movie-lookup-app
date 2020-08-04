@@ -2,14 +2,15 @@ import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card,Button} from 'react-bootstrap';
 
-const MovieCard = () => {
+const MovieCard = props => {
   return (
     <Card className="card">
-      <Card.Header as="h5">Movie Title</Card.Header>
+      <Card.Header as="h5">{props.title}</Card.Header>
+      <Card.Img variant="top" src={props.img} />
       <Card.Body>
-        <Card.Title>Year</Card.Title>
+        <Card.Title>{props.year}</Card.Title>
         <Card.Text>
-          Movie description.
+          {props.description}
         </Card.Text>
         <Button variant="primary">Rent Movie</Button>
       </Card.Body>
