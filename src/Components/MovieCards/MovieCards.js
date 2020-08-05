@@ -8,11 +8,11 @@ class MovieCards extends Component {
     super(props);
     this.state = {};
   }
-
+////////////////<Button onClick={() => props.sumbitSearch('Her')}>Search</Button>
   componentDidMount() {
     let moviesObj = {}
     // eslint-disable-next-line no-undef
-    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=Braveheart`)
+    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
     .then(res => res.json())
     .then( result => {
       moviesObj = result

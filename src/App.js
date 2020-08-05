@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,11 +8,18 @@ import Sidebar from './Components/Navigation/SideBar/Sidebar';
 import MovieCards from './Components/MovieCards/MovieCards'
 
 const App = () => {
+  const [searchEntry, setSearchEntry] = useState('Braveheart');
+
+  const loadSearch = search => {
+    setSearchEntry(search);
+    console.log(search)
+  }
+
   return (
     <>
-      <MainNav />
+      <MainNav sumbitSearch={loadSearch}/>
       <Sidebar />
-      <MovieCards />
+      <MovieCards search={searchEntry}/>
     </>
   );
 }
