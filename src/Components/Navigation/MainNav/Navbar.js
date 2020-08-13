@@ -11,7 +11,7 @@ class MainNav extends Component {
     }
   }
 
-  handleChange = (event, key) => {
+  handleChange (event, key) {
     this.setState({
       [key]: event.target.value
     });
@@ -27,9 +27,9 @@ class MainNav extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
-            <Form inline>
+            <Form inline onSubmit={() => this.props.sumbitSearch('Her')}>
               <FormControl type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')}/>
-              <Button onClick={() => this.props.sumbitSearch('Her')}>Search</Button>
+              <Button type="submit">Search</Button>
             </Form>
           </Navbar.Collapse>
         </Navbar>

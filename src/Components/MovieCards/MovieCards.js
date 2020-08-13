@@ -8,7 +8,7 @@ class MovieCards extends Component {
     super(props);
     this.state = {};
   }
-////////////////<Button onClick={() => props.sumbitSearch('Her')}>Search</Button>
+
   componentDidMount() {
     let moviesObj = {}
     // eslint-disable-next-line no-undef
@@ -23,6 +23,25 @@ class MovieCards extends Component {
       error => this.setState({error})
     )
    }
+
+
+  // static getDerivedStateFromProps (nextProps, prevState) {
+  //   let moviesObj = {}
+  //   console.log(nextProps);
+  //   // eslint-disable-next-line no-undef
+  //   fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${nextProps.search}`)
+  //   .then(res => res.json())
+  //   .then( result => {
+  //     moviesObj = result
+  //     return this.setState(moviesObj)
+  //   })
+  //   .then(
+  //     () => this.setState(moviesObj),
+  //     error => this.setState({error})
+  //   )
+  // }
+
+
   render() {
     return (
       <div className='body'>

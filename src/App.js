@@ -12,7 +12,6 @@ const App = () => {
 
   const loadSearch = search => {
     setSearchEntry(search);
-    console.log(search)
   }
 
   return (
