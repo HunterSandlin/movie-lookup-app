@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -7,20 +7,47 @@ import MainNav from './Components/Navigation/MainNav/Navbar';
 import Sidebar from './Components/Navigation/SideBar/Sidebar';
 import MovieCards from './Components/MovieCards/MovieCards'
 
-const App = () => {
-  const [searchEntry, setSearchEntry] = useState('Braveheart');
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = ({ title: 'Braveheart' })
 
-  const loadSearch = search => {
-    setSearchEntry(search);
+    this.loadSearch = (searchData) => {
+      console.log(searchData)
+      this.setState({title: searchData})
+      console.log(this.state);
+    }
+
+    console.log(this.state);
   }
 
-  return (
-    <>
-      <MainNav sumbitSearch={loadSearch}/>
+  render() {
+    return (
+          <>
+      <MainNav submitSearch={this.loadSearch}/>
       <Sidebar />
-      <MovieCards search={searchEntry}/>
+      <MovieCards search={this.state.title}/>
     </>
-  );
+     );
+  }
 }
 
 export default App;
+
+// const App = () => {
+//   setState('')
+
+//   const loadSearch = search => {
+//     setState(search);
+//   }
+
+//   return (
+//     <>
+//       <MainNav sumbitSearch={loadSearch}/>
+//       <Sidebar />
+//       <MovieCards search={}/>
+//     </>
+//   );
+// }
+
+// export default App;

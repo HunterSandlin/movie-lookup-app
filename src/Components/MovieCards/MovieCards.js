@@ -11,6 +11,23 @@ class MovieCards extends Component {
 
   componentDidMount() {
     let moviesObj = {}
+    console.log(this.props.search);
+    // eslint-disable-next-line no-undef
+    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
+    .then(res => res.json())
+    .then( result => {
+      moviesObj = result
+      return moviesObj
+    })
+    .then(
+      () => this.setState(moviesObj),
+      error => this.setState({error})
+    )
+   }
+
+   componentDidUpdate() {
+    let moviesObj = {}
+    console.log(this.props.search);
     // eslint-disable-next-line no-undef
     fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
     .then(res => res.json())

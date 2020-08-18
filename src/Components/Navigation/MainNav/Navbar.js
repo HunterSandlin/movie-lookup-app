@@ -27,9 +27,9 @@ class MainNav extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
-            <Form inline onSubmit={() => this.props.sumbitSearch('Her')}>
+            <Form inline >
               <FormControl type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')}/>
-              <Button type="submit">Search</Button>
+              <Button onClick={() => this.props.submitSearch('Her')}>Search</Button>
             </Form>
           </Navbar.Collapse>
         </Navbar>
