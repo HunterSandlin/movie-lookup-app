@@ -98,3 +98,4 @@ ssl/
 .prettierrc.js
 
 package-lock.json
+.env.development
