@@ -1,63 +1,48 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MovieCard from './MovieCard/MovieCard'
 
-class MovieCards extends Component {
+class MovieCards extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount() {
-    let moviesObj = {}
-    console.log(this.props.search);
-    // eslint-disable-next-line no-undef
-    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
-    .then(res => res.json())
-    .then( result => {
-      moviesObj = result
-      return moviesObj
-    })
-    .then(
-      () => this.setState(moviesObj),
-      error => this.setState({error})
-    )
-   }
-
-   componentDidUpdate() {
-    let moviesObj = {}
-    console.log(this.props.search);
-    // eslint-disable-next-line no-undef
-    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
-    .then(res => res.json())
-    .then( result => {
-      moviesObj = result
-      return moviesObj
-    })
-    .then(
-      () => this.setState(moviesObj),
-      error => this.setState({error})
-    )
-   }
-
-
-  // static getDerivedStateFromProps (nextProps, prevState) {
+  // componentDidMount() {
   //   let moviesObj = {}
-  //   console.log(nextProps);
+  //   console.log(this.props.search);
   //   // eslint-disable-next-line no-undef
-  //   fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${nextProps.search}`)
+  //   fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
   //   .then(res => res.json())
   //   .then( result => {
   //     moviesObj = result
-  //     return this.setState(moviesObj)
+  //     return moviesObj
   //   })
   //   .then(
   //     () => this.setState(moviesObj),
   //     error => this.setState({error})
   //   )
-  // }
+  //  }
 
+   componentDidUpdate(prevProps) {
+     console.log(prevProps);
+    if (this.props.search !== prevProps.search) {
+      let moviesObj = {}
+      console.log(this.props.search);
+      // eslint-disable-next-line no-undef
+      fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}&t=${this.props.search}`)
+      .then(res => res.json())
+      .then( result => {
+        moviesObj = result
+        return moviesObj
+      })
+      .then(
+        () => this.setState(moviesObj),
+        error => this.setState({error})
+      )
+      }
+   }
 
   render() {
     return (
