@@ -10,7 +10,7 @@ import MovieCards from './Components/MovieCards/MovieCards'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = ({ title: 'Braveheart' })
+    this.state = ({ title: '' })
 
     this.loadSearch = (searchData) => {
       console.log(searchData)

@@ -1,0 +1,12 @@
+- Search with hitting enter key
+- Ability to choose between movie, series and episode
+- Request short plot or full plot
+- Try to see if there is more than one movie with the same name is it possible to show all of them
+- Filter by year
+- Posibility to choose season if searching for a series
+- New search returns an array of movies. Try to use map to loop through them and show each card
+-Add pagination
+- Maybe prefetch next page
+- Make a function that constructs the URL string
+- Make the API fetcher a separate function
+- Add TMDB attribution on the bottom of the page

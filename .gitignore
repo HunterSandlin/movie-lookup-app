@@ -66,6 +66,8 @@ typings/
 .env
 *.env
 .env.test
+.env.development
+.env.*
 
 config.env
 config/config.env
