@@ -29,7 +29,7 @@ class MainNav extends Component {
             </Nav>
             <Form inline >
               <FormControl type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')}/>
-              <Button onClick={() => this.props.submitSearch('Her')}>Search</Button>
+              <Button onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button>
             </Form>
           </Navbar.Collapse>
         </Navbar>
