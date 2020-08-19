@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
+import {Navbar, Nav, Form, FormControl/*, Button*/} from 'react-bootstrap';
 
 class MainNav extends Component {
   constructor(props) {
@@ -17,6 +17,14 @@ class MainNav extends Component {
     });
   }
 
+  // document.getElementById("searchTextBox").addEventListener("keyup", function(event) {
+  //   if (event.keyCode === 13) {
+  //     event.preventDefault();
+  //     document.getElementById("submitTextBox").click();
+  //   }
+  // });
+
+
   render() {
     return (
       <div>
@@ -28,8 +36,8 @@ class MainNav extends Component {
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
             <Form inline >
-              <FormControl type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')}/>
-              <Button onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button>
+              <FormControl id="searchTextBox" type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')} onKeyUp={() => this.props.submitSearch(this.state.searchInput)}/>
+              {/* <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> */}
             </Form>
           </Navbar.Collapse>
         </Navbar>
@@ -37,5 +45,7 @@ class MainNav extends Component {
     )
   }
 }
+
+
 
 export default MainNav;

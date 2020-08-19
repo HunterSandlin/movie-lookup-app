@@ -13,10 +13,10 @@ class MovieCards extends PureComponent {
     let moviesObj = {}
     console.log(this.props.search);
     // eslint-disable-next-line no-undef
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5)}`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5 + 1)}`)
     .then(res => res.json())
     .then( result => {
-      console.log(result);
+      // console.log(result);
       moviesObj = result.results[Math.floor(Math.random() * 20)]
       console.log(moviesObj);
       return moviesObj
