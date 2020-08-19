@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Nav, Form, FormControl /*, Button*/ } from "react-bootstrap";
+import { Navbar, Nav, Form, FormControl , Button } from "react-bootstrap";
 
 class MainNav extends Component {
   constructor(props) {
@@ -53,7 +53,10 @@ class MainNav extends Component {
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
               />
-              {/* <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> */}
+              { !this.state.checked ?
+                <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> :
+                <div className="emptyDiv"></div>
+                }
             </Form>
           </Navbar.Collapse>
         </Navbar>
