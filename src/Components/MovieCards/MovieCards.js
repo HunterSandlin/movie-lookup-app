@@ -29,6 +29,8 @@ class MovieCards extends PureComponent {
 
    componentDidUpdate(prevProps) {
 
+    // get navbar's this.checked, if it's checked OR if they hit enter do this stuff...
+
     if (this.props.search !== prevProps.search) {
       let moviesObj = {}
       console.log(this.props.search);
