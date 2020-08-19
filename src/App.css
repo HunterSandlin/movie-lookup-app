@@ -5,10 +5,10 @@
 }
 
 .sidenav {
-  height: 100%; 
-  width: 250px; 
+  height: 100%;
+  width: 250px;
   padding-top: 20px;
-  position: fixed; 
+  position: fixed;
   background-color: #ececec;
 }
 
@@ -30,4 +30,26 @@
   margin: 20px;
   float: left;
   max-width: 22rem;
+}
+
+.liveSearchCheckbox {
+  margin-right: 30px;
+}
+
+.checkboxLabel {
+  margin: 0 10px 0 0;
+  color: rgba(0,0,0,.5);
+  font-size: 14px;
+}
+
+.emptyDiv {
+padding: 10px 38.5px;
+}
+
+.mar-small {
+  margin-right: 15px;
+}
+
+.move-right {
+  margin-left: auto;
 }
