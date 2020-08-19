@@ -38,7 +38,13 @@ class MainNav extends Component {
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
             <Form inline>
-              <FormControl type="checkbox" className="liveSearchCheckbox" onChange={(event) => this.handleChange(event, "checked") }/>
+            <p className="checkboxLabel">Live Search</p>
+              <Form.Check
+              // type="checkbox"
+              className="liveSearchCheckbox"
+              onChange={(event) => this.handleChange(event, "checked") }
+              />
+
               <FormControl
                 type="search"
                 placeholder="Search"
