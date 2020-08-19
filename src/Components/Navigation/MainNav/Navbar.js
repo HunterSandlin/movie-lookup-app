@@ -34,10 +34,16 @@ class MainNav extends Component {
           <Navbar.Brand href="#home">Movie Finder</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="mar-small">
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
-            <Form inline>
+            <Nav className="mar-small">
+              <Nav.Link href="#movies">Movies</Nav.Link>
+            </Nav>
+            <Nav className="mar-small">
+              <Nav.Link href="#series">Series</Nav.Link>
+            </Nav>
+            <Form inline className="move-right">
             <p className="checkboxLabel">Live Search</p>
               <Form.Check
               // type="checkbox"
@@ -49,7 +55,7 @@ class MainNav extends Component {
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
-                //Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
+                //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
               />
