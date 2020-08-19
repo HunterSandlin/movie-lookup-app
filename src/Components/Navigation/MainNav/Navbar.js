@@ -23,8 +23,16 @@ class MainNav extends Component {
         [key]: event.target.value
       });
     }
+  }
 
-
+  handleKeyDown(event) {
+    //if it's enter, update sreachInput state and search box value
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.props.submitSearch(this.state.searchInput);
+      this.setState({searchInput: ''});
+      document.getElementById('searchTextBox').value = '';
+    } 
   }
 
   render() {
@@ -50,14 +58,15 @@ class MainNav extends Component {
               className="liveSearchCheckbox"
               onChange={(event) => this.handleChange(event, "checked") }
               />
-
+              
               <FormControl
+                id="searchTextBox"
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
                 //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
                 onChange={(event) => this.handleChange(event, "searchInput")}
-                onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
+                onKeyDown={(event) => this.handleKeyDown(event)}
               />
               { !this.state.checked ?
                 <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> :
