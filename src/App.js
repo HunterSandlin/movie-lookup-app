@@ -15,10 +15,10 @@ class App extends Component {
       checked: null
     })
 
-    this.loadSearch = (searchData, isChecked) => {
+    this.loadSearch = (searchData) => {
       this.setState({
         title: searchData,
-        checked: !isChecked})
+      })
     }
 
   }

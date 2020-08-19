@@ -14,10 +14,16 @@ class MainNav extends Component {
 
   handleChange(event, key) {
     console.log(this.state);
-    this.setState({
-      [key]: event.target.value,
-      checked: !this.state.checked
-    });
+    if(key === "checked") {
+      this.setState({
+        [key]: !this.state.checked
+      });
+    } else {
+      this.setState({
+        [key]: event.target.value
+      });
+    }
+
 
   }
 
@@ -37,6 +43,7 @@ class MainNav extends Component {
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
+                //Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
               />
