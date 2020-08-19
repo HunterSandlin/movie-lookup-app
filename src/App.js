@@ -10,10 +10,15 @@ import MovieCards from './Components/MovieCards/MovieCards'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = ({ title: '' })
+    this.state = ({
+      title: '',
+      checked: null
+    })
 
-    this.loadSearch = (searchData) => {
-      this.setState({title: searchData})
+    this.loadSearch = (searchData, isChecked) => {
+      this.setState({
+        title: searchData,
+        checked: !isChecked})
     }
 
   }

@@ -1,29 +1,25 @@
-import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav, Form, FormControl/*, Button*/} from 'react-bootstrap';
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Navbar, Nav, Form, FormControl /*, Button*/ } from "react-bootstrap";
 
 class MainNav extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      searchInput: ''
-    }
+      searchInput: "",
+      checked: false
+    };
   }
 
-  handleChange (event, key) {
+  handleChange(event, key) {
+    console.log(this.state);
     this.setState({
-      [key]: event.target.value
+      [key]: event.target.value,
+      checked: !this.state.checked
     });
+
   }
-
-  // document.getElementById("searchTextBox").addEventListener("keyup", function(event) {
-  //   if (event.keyCode === 13) {
-  //     event.preventDefault();
-  //     document.getElementById("submitTextBox").click();
-  //   }
-  // });
-
 
   render() {
     return (
@@ -35,17 +31,22 @@ class MainNav extends Component {
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
             </Nav>
-            <Form inline >
-              <FormControl id="searchTextBox" type="search" placeholder="Search" className="mr-sm-2" onChange={event => this.handleChange(event, 'searchInput')} onKeyUp={() => this.props.submitSearch(this.state.searchInput)}/>
+            <Form inline>
+              <FormControl type="checkbox" className="liveSearchCheckbox" onChange={(event) => this.handleChange(event, "checked") }/>
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="mr-sm-2"
+                onChange={(event) => this.handleChange(event, "searchInput")}
+                onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
+              />
               {/* <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> */}
             </Form>
           </Navbar.Collapse>
         </Navbar>
       </div>
-    )
+    );
   }
 }
-
-
 
 export default MainNav;
