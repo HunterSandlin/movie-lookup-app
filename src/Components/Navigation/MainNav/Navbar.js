@@ -36,7 +36,7 @@ class MainNav extends Component {
   clearInput(event) {
     //if it's enter or submit button, update sreachInput state and search box value
     if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
-    this.props.submitSearch(this.state.searchInput);
+    this.props.submitSearch(event, this.state.searchInput);
     this.setState({searchInput: ''});
     document.getElementById('searchTextBox').value = '';
     }
@@ -79,7 +79,7 @@ class MainNav extends Component {
               placeholder="Search"
               className="mr-sm-2"
               onChange={(event) => this.handleChange(event, "searchInput")}
-              onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
+              onKeyUp={(event) => this.props.submitSearch(event, this.state.searchInput)}
             />}
               { !this.state.checked ?
                 <Button
