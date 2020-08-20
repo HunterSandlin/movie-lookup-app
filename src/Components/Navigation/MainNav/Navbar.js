@@ -59,8 +59,7 @@ class MainNav extends Component {
               className="liveSearchCheckbox"
               onChange={(event) => this.handleChange(event, "checked") }
               />
-              { // If checkbox is not checked works as a normal input field
-              !this.state.checked ?               
+              
               <FormControl
                 id="searchTextBox"
                 type="search"
@@ -68,16 +67,7 @@ class MainNav extends Component {
                 className="mr-sm-2"
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyDown={(event) => this.handleKeyDown(event)}
-              /> : // If checkbox is checked live search is enabled
-              <FormControl
-              id="searchTextBox"
-              type="search"
-              placeholder="Search"
-              className="mr-sm-2"
-              onChange={(event) => this.handleChange(event, "searchInput")}
-              onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
-            />}
-
+              />
               { !this.state.checked ?
                 <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> :
                 <div className="emptyDiv"></div>
