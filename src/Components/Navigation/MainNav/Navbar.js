@@ -14,12 +14,7 @@ class MainNav extends Component {
 
   //Updates state
   handleChange(event, key) {
-<<<<<<< HEAD
-    //TODO: When checkbox is checked, disable submit on enter.
-    console.log(this.state);
-=======
     // Switch checked state when checkbox state changes
->>>>>>> ae6783a926207ed86541337291b0ba23c850f76e
     if(key === "checked") {
       this.setState({
         [key]: !this.state.checked
@@ -66,22 +61,14 @@ class MainNav extends Component {
                 className="liveSearchCheckbox"
                 onChange={(event) => this.handleChange(event, "checked") }
               />
-<<<<<<< HEAD
-              
-=======
               {/* If live search disabled */}
               {!this.state.checked ?
->>>>>>> ae6783a926207ed86541337291b0ba23c850f76e
               <FormControl
                 id="searchTextBox"
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
                 onChange={(event) => this.handleChange(event, "searchInput")}
-<<<<<<< HEAD
-                onKeyDown={(event) => this.handleKeyDown(event)}
-              />
-=======
                 onKeyDown={(event) => this.clearInput(event)}
               /> :
               // If live search enabled
@@ -94,7 +81,6 @@ class MainNav extends Component {
                 onKeyUp={(event) => this.props.submitSearch(event, this.state.searchInput)}
             />}
               {/* Shows/hides button depending on checkbox's state */}
->>>>>>> ae6783a926207ed86541337291b0ba23c850f76e
               { !this.state.checked ?
                 <Button
                   id="submitTextBox"
