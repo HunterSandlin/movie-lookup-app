@@ -11,16 +11,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      title: '',
-      checked: null
+      title: ''
     })
 
-    this.loadSearch = (searchData) => {
-      this.setState({
-        title: searchData,
-      })
+    //Moves search input value between from Navbar.js to movieCards.js
+    this.loadSearch = (event, searchData) => {
+      if (event.key !== 'Backspace') {
+        this.setState({
+          title: searchData,
+        })
+      }
     }
-
   }
 
   render() {
