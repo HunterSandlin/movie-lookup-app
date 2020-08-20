@@ -13,12 +13,13 @@ class MainNav extends Component {
   }
 
   handleChange(event, key) {
+    //TODO: When checkbox is checked, disable submit on enter.
     console.log(this.state);
     if(key === "checked") {
       this.setState({
         [key]: !this.state.checked
       });
-    } else {
+    } else{
       this.setState({
         [key]: event.target.value
       });
@@ -58,22 +59,21 @@ class MainNav extends Component {
               className="liveSearchCheckbox"
               onChange={(event) => this.handleChange(event, "checked") }
               />
-              {!this.state.checked ?               
+              { // If checkbox is not checked works as a normal input field
+              !this.state.checked ?               
               <FormControl
                 id="searchTextBox"
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
-                //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyDown={(event) => this.handleKeyDown(event)}
-              /> : 
+              /> : // If checkbox is checked live search is enabled
               <FormControl
               id="searchTextBox"
               type="search"
               placeholder="Search"
               className="mr-sm-2"
-              //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
               onChange={(event) => this.handleChange(event, "searchInput")}
               onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
             />}
