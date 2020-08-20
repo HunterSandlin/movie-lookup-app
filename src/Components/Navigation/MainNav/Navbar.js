@@ -32,7 +32,7 @@ class MainNav extends Component {
       this.props.submitSearch(this.state.searchInput);
       this.setState({searchInput: ''});
       document.getElementById('searchTextBox').value = '';
-    } 
+    }
   }
 
   render() {
@@ -51,33 +51,30 @@ class MainNav extends Component {
             <Nav className="mar-small">
               <Nav.Link href="#series">Series</Nav.Link>
             </Nav>
-            <Form inline className="move-right">
+            <Form inline className="move-right" onSubmit={e => { e.preventDefault(); }}>
             <p className="checkboxLabel">Live Search</p>
               <Form.Check
-              // type="checkbox"
               className="liveSearchCheckbox"
               onChange={(event) => this.handleChange(event, "checked") }
               />
-              {!this.state.checked ?               
+              {!this.state.checked ?
               <FormControl
                 id="searchTextBox"
                 type="search"
                 placeholder="Search"
                 className="mr-sm-2"
-                //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyDown={(event) => this.handleKeyDown(event)}
-              /> : 
+              /> :
               <FormControl
               id="searchTextBox"
               type="search"
               placeholder="Search"
               className="mr-sm-2"
-              //TODO: Create a function that handles both of these functions togetehr because I think the enter doesn't submit because onChange gets called befor onKeyUp
               onChange={(event) => this.handleChange(event, "searchInput")}
               onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
             />}
-
+              {/*TODO: Clear input field when search button is clicked */}
               { !this.state.checked ?
                 <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> :
                 <div className="emptyDiv"></div>
