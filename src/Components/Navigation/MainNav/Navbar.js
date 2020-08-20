@@ -11,9 +11,9 @@ class MainNav extends Component {
       checked: false
     };
   }
-
+  //Updates state
   handleChange(event, key) {
-    console.log(this.state);
+    // Switch checked state when checkbox state changes
     if(key === "checked") {
       this.setState({
         [key]: !this.state.checked
@@ -34,7 +34,7 @@ class MainNav extends Component {
   // }
 
   clearInput(event) {
-    //if it's enter or submit button, update sreachInput state and search box value
+    //if it's enter or submit button, update searchInput state and clear search box value
     if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
     this.props.submitSearch(event, this.state.searchInput);
     this.setState({searchInput: ''});
@@ -49,21 +49,18 @@ class MainNav extends Component {
           <Navbar.Brand href="#home">Movie Finder</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mar-small">
+            <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
-            </Nav>
-            <Nav className="mar-small">
               <Nav.Link href="#movies">Movies</Nav.Link>
-            </Nav>
-            <Nav className="mar-small">
               <Nav.Link href="#series">Series</Nav.Link>
             </Nav>
-            <Form inline className="move-right" onSubmit={e => { e.preventDefault(); }}>
+            <Form inline onSubmit={e => { e.preventDefault(); }}>
             <p className="checkboxLabel">Live Search</p>
               <Form.Check
               className="liveSearchCheckbox"
               onChange={(event) => this.handleChange(event, "checked") }
               />
+              {/* If live search disabled */}
               {!this.state.checked ?
               <FormControl
                 id="searchTextBox"
@@ -73,10 +70,11 @@ class MainNav extends Component {
                 onChange={(event) => this.handleChange(event, "searchInput")}
                 onKeyDown={(event) => this.clearInput(event)}
               /> :
+              // If live search enabled
               <FormControl
               id="searchTextBox"
               type="search"
-              placeholder="Search"
+              placeholder="Live Search"
               className="mr-sm-2"
               onChange={(event) => this.handleChange(event, "searchInput")}
               onKeyUp={(event) => this.props.submitSearch(event, this.state.searchInput)}

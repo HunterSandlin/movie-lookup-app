@@ -13,7 +13,7 @@ class App extends Component {
     this.state = ({
       title: ''
     })
-
+    //Moves search input value between from Navbar.js to movieCards.js
     this.loadSearch = (event, searchData) => {
       if (event.key !== 'Backspace') {
         this.setState({
