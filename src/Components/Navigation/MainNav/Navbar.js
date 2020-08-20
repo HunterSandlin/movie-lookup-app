@@ -25,13 +25,20 @@ class MainNav extends Component {
     }
   }
 
-  handleKeyDown(event) {
-    //if it's enter, update sreachInput state and search box value
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.props.submitSearch(this.state.searchInput);
-      this.setState({searchInput: ''});
-      document.getElementById('searchTextBox').value = '';
+  // handleKeyDown(event) {
+  //   //if it's enter, update sreachInput state and search box value
+  //   if (event.key === 'Enter') {
+  //     // event.preventDefault();
+  //     this.clearInput()
+  //   }
+  // }
+
+  clearInput(event) {
+    //if it's enter or submit button, update sreachInput state and search box value
+    if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
+    this.props.submitSearch(this.state.searchInput);
+    this.setState({searchInput: ''});
+    document.getElementById('searchTextBox').value = '';
     }
   }
 
@@ -64,7 +71,7 @@ class MainNav extends Component {
                 placeholder="Search"
                 className="mr-sm-2"
                 onChange={(event) => this.handleChange(event, "searchInput")}
-                onKeyDown={(event) => this.handleKeyDown(event)}
+                onKeyDown={(event) => this.clearInput(event)}
               /> :
               <FormControl
               id="searchTextBox"
@@ -74,9 +81,13 @@ class MainNav extends Component {
               onChange={(event) => this.handleChange(event, "searchInput")}
               onKeyUp={() => this.props.submitSearch(this.state.searchInput)}
             />}
-              {/*TODO: Clear input field when search button is clicked */}
               { !this.state.checked ?
-                <Button id="submitTextBox" onClick={() => this.props.submitSearch(this.state.searchInput)}>Search</Button> :
+                <Button
+                  id="submitTextBox"
+                  onClick={(event) => this.clearInput(event)}>
+                  Search
+                </Button> :
+                //An empty div that takes up the space of chen live search is checked and submit button is hidden
                 <div className="emptyDiv"></div>
                 }
             </Form>
