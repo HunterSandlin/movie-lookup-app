@@ -11,6 +11,7 @@ class MainNav extends Component {
       checked: false
     };
   }
+
   //Updates state
   handleChange(event, key) {
     // Switch checked state when checkbox state changes
@@ -36,9 +37,9 @@ class MainNav extends Component {
   clearInput(event) {
     //if it's enter or submit button, update searchInput state and clear search box value
     if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
-    this.props.submitSearch(event, this.state.searchInput);
-    this.setState({searchInput: ''});
-    document.getElementById('searchTextBox').value = '';
+      this.props.submitSearch(event, this.state.searchInput);
+      this.setState({searchInput: ''});
+      document.getElementById('searchTextBox').value = '';
     }
   }
 
@@ -55,10 +56,10 @@ class MainNav extends Component {
               <Nav.Link href="#series">Series</Nav.Link>
             </Nav>
             <Form inline onSubmit={e => { e.preventDefault(); }}>
-            <p className="checkboxLabel">Live Search</p>
+              <p className="checkboxLabel">Live Search</p>
               <Form.Check
-              className="liveSearchCheckbox"
-              onChange={(event) => this.handleChange(event, "checked") }
+                className="liveSearchCheckbox"
+                onChange={(event) => this.handleChange(event, "checked") }
               />
               {/* If live search disabled */}
               {!this.state.checked ?
@@ -72,13 +73,14 @@ class MainNav extends Component {
               /> :
               // If live search enabled
               <FormControl
-              id="searchTextBox"
-              type="search"
-              placeholder="Live Search"
-              className="mr-sm-2"
-              onChange={(event) => this.handleChange(event, "searchInput")}
-              onKeyUp={(event) => this.props.submitSearch(event, this.state.searchInput)}
+                id="searchTextBox"
+                type="search"
+                placeholder="Live Search"
+                className="mr-sm-2"
+                onChange={(event) => this.handleChange(event, "searchInput")}
+                onKeyUp={(event) => this.props.submitSearch(event, this.state.searchInput)}
             />}
+              {/* Shows/hides button depending on checkbox's state */}
               { !this.state.checked ?
                 <Button
                   id="submitTextBox"

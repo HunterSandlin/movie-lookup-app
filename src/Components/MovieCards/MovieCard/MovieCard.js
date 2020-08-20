@@ -9,9 +9,7 @@ const MovieCard = props => {
       <Card.Img variant="top" src={props.img} />
       <Card.Body>
         <Card.Title>{props.year}</Card.Title>
-        <Card.Text>
-          {props.description}
-        </Card.Text>
+        <Card.Text>{props.description}</Card.Text>
         <Button variant="primary">Detail</Button>
       </Card.Body>
     </Card>

@@ -8,17 +8,14 @@ class MovieCards extends PureComponent {
     super(props);
     this.state = {};
   }
-// Quick
+// Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
     let moviesObj = {}
-    console.log(this.props.search);
     // eslint-disable-next-line no-undef
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5 + 1)}`)
     .then(res => res.json())
     .then( result => {
-      // console.log(result);
       moviesObj = result.results[Math.floor(Math.random() * 20)]
-      console.log(moviesObj);
       return moviesObj
     })
     .then(
@@ -27,20 +24,14 @@ class MovieCards extends PureComponent {
     )
   }
 
-   componentDidUpdate(prevProps) {
-
-    //TODO: get navbar's this.checked, if it's checked OR if they hit enter do this stuff...
-
+  componentDidUpdate(prevProps) {
     if (this.props.search !== prevProps.search) {
       let moviesObj = {}
-      console.log(this.props.search);
       // eslint-disable-next-line no-undef
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
       .then(res => res.json())
       .then( result => {
-        console.log(result);
         moviesObj = result.results[0]
-        console.log(moviesObj);
         return moviesObj
       })
       .then(
