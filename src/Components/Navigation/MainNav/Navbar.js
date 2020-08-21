@@ -43,6 +43,10 @@ class MainNav extends Component {
     }
   }
 
+  activeLink() {
+
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +54,7 @@ class MainNav extends Component {
           <Navbar.Brand href="#home">Movie Finder</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="mr-auto" defaultActiveKey="#home">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#movies">Movies</Nav.Link>
               <Nav.Link href="#series">Series</Nav.Link>

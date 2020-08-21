@@ -1,3 +1,11 @@
+.body {
+  padding-top: 70px;
+  padding-left: 260px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 .navbar {
   top: 0;
   position: sticky;
@@ -14,14 +22,6 @@
   position: fixed;
   background-color: #ececec;
   box-shadow: 0 3px 3px 3px rgba(0, 0, 0, 0.15);
-}
-
-.body {
-  padding-top: 70px;
-  padding-left: 260px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
 }
 
 Button {
@@ -65,6 +65,7 @@ padding: 10px 38.5px;
 
 #poster-container {
   position: relative;
+  border-radius: 0;
 }
 
 #poster-rating {
