@@ -8,6 +8,7 @@ class MovieCards extends PureComponent {
     super(props);
     this.state = {};
   }
+
 // Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
     let moviesObj = {}
@@ -17,7 +18,8 @@ class MovieCards extends PureComponent {
     .then( result => {
       moviesObj = result.results[Math.floor(Math.random() * 20)]
       moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
-      moviesObj.year = " (" + moviesObj.release_date.split("-")[0] + ")";
+      moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
+      console.log(moviesObj);
       return moviesObj
     })
     .then(
@@ -26,6 +28,7 @@ class MovieCards extends PureComponent {
     )
   }
 
+  // Runs when state updates
   componentDidUpdate(prevProps) {
     if (this.props.search !== prevProps.search) {
       let moviesObj = {}
@@ -38,7 +41,7 @@ class MovieCards extends PureComponent {
         //get shortened string
         moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
         //add year to title
-        moviesObj.year = " (" + moviesObj.release_date.split("-")[0] + ")";
+        moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
         return moviesObj
       })
       .then(
@@ -52,6 +55,10 @@ class MovieCards extends PureComponent {
     return(details.split(' ').slice(0, 25).join(' ').concat('...'));
   }
 
+  shortenReleaseDate(fullDate) {
+    return(fullDate.split("-")[0])
+  }
+
 
   render() {
     return (
@@ -59,6 +66,7 @@ class MovieCards extends PureComponent {
         <MovieCard
           title={this.state.title}
           //TODO: add year and short description to componentDidMount
+          vote={this.state.vote_average}
           release_year={this.state.year}
           description={this.state.shortOverview}
           img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}

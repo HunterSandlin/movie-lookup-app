@@ -45,3 +45,43 @@
 .emptyDiv {
 padding: 10px 38.5px;
 }
+
+#poster-container {
+  position: relative;
+}
+
+#poster-rating {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 3px 5px 5px 6px;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  color: #fff;
+  /* background-color: rgba(240, 240, 240, 0.815); */
+  border-radius: 5px;
+  box-shadow: 4px 4px 15px rgba(107, 107, 107, 0.3);
+}
+
+#title-year {
+  font-size: 1rem;
+  color: #5f6975;
+}
+
+#card-description {
+  color: #5f6975;
+}
+
+.green {
+  background-color: green;
+}
+
+.orange {
+  background-color: rgb(197, 128, 0);
+}
+
+.red {
+  background-color: red;
+}
+
+
