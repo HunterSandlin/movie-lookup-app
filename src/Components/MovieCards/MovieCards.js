@@ -17,6 +17,7 @@ class MovieCards extends PureComponent {
     .then(res => res.json())
     .then( result => {
       moviesArr = result.results
+      //TODO: Fix description shortening on the cards
       // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
       // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
     })
@@ -57,23 +58,19 @@ class MovieCards extends PureComponent {
 
 
   render() {
+    //TODO: Might be a good idea to move this out from the render method if it's possible, but I had no time to try it out.
+    //Don't render if state is empty
     if (this.state.movies !== null) {
+      //Loop through the movies and render them on the screen
       const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={movie.release_date} description={movie.overview} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
         <div className='body'>
-          {/* <MovieCard
-            title={this.state.movies[0].title}
-            //TODO: add year and short description to componentDidMount
-            vote={this.state.vote_average}
-            release_year={this.state.year}
-            description={this.state.shortOverview}
-            img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}
-          /> */}
           {movies}
         </div>
       )
     } else {
-      return <h1>Loading</h1>
+      //render has to return something until fetch receives the movies and updates the state.
+      return null
     }
 
   }

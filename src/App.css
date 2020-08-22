@@ -59,6 +59,16 @@ Button:focus {
   box-shadow: 2px 2px 10px 5px rgba(107, 107, 107, 0.2);
 }
 
+#card-description-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+#card-description-container Button {
+  margin: auto auto 5px 5px;
+}
+
 .liveSearchCheckbox {
   margin-right: 30px;
 }

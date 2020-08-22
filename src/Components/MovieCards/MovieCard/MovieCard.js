@@ -21,7 +21,7 @@ const MovieCard = props => {
         <Card.Text className={ratingColorHandler(props.vote)} id="poster-rating">{props.vote}</Card.Text>
       </div>
 
-      <Card.Body>
+      <Card.Body id="card-description-container">
         <Card.Text id="card-description">{props.description}</Card.Text>
         <Button variant="primary">Details</Button>
       </Card.Body>
