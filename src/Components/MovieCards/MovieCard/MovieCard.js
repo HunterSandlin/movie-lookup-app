@@ -15,13 +15,14 @@ const MovieCard = props => {
   }
   return (
     <Card className="card">
-      <Card.Header as="h5">{props.title}  <span id="title-year"><em>{props.release_year}</em></span></Card.Header>
+
       <div id="poster-container">
         <Card.Img variant="top" src={props.img}/>
+        <Card.Header as="h5">{props.title}  <span id="title-year"><em>{props.release_year}</em></span></Card.Header>
         <Card.Text className={ratingColorHandler(props.vote)} id="poster-rating">{props.vote}</Card.Text>
       </div>
 
-      <Card.Body>
+      <Card.Body id="card-description-container">
         <Card.Text id="card-description">{props.description}</Card.Text>
         <Button variant="primary">Details</Button>
       </Card.Body>

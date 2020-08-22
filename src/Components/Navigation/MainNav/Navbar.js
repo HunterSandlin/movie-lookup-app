@@ -26,14 +26,6 @@ class MainNav extends Component {
     }
   }
 
-  // handleKeyDown(event) {
-  //   //if it's enter, update sreachInput state and search box value
-  //   if (event.key === 'Enter') {
-  //     // event.preventDefault();
-  //     this.clearInput()
-  //   }
-  // }
-
   clearInput(event) {
     //if it's enter or submit button, update searchInput state and clear search box value
     if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
@@ -50,7 +42,7 @@ class MainNav extends Component {
           <Navbar.Brand href="#home">Movie Finder</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="mr-auto" defaultActiveKey="#home">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#movies">Movies</Nav.Link>
               <Nav.Link href="#series">Series</Nav.Link>

@@ -6,24 +6,23 @@ import MovieCard from './MovieCard/MovieCard'
 class MovieCards extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {movies: null};
   }
 
 // Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
-    let moviesObj = {}
+    let moviesArr = []
     // eslint-disable-next-line no-undef
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5 + 1)}`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
     .then(res => res.json())
     .then( result => {
-      moviesObj = result.results[Math.floor(Math.random() * 20)]
-      moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
-      moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
-      console.log(moviesObj);
-      return moviesObj
+      moviesArr = result.results
+      //TODO: Fix description shortening on the cards
+      // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
+      // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
     })
     .then(
-      () => this.setState(moviesObj),
+      () => this.setState({movies: moviesArr}),
       error => this.setState({error})
     )
   }
@@ -31,21 +30,19 @@ class MovieCards extends PureComponent {
   // Runs when state updates
   componentDidUpdate(prevProps) {
     if (this.props.search !== prevProps.search) {
-      let moviesObj = {}
+      let moviesArr = []
       // eslint-disable-next-line no-undef
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
       .then(res => res.json())
       .then( result => {
-        console.log(result);
-        moviesObj = result.results[0]
+        moviesArr = result.results
         //get shortened string
-        moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
-        //add year to title
-        moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
-        return moviesObj
+        // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
+        // //add year to title
+        // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
       })
       .then(
-        () => this.setState(moviesObj),
+        () => this.setState({movies: moviesArr}),
         error => this.setState({error})
       )
     }
@@ -61,18 +58,21 @@ class MovieCards extends PureComponent {
 
 
   render() {
-    return (
-      <div className='body'>
-        <MovieCard
-          title={this.state.title}
-          //TODO: add year and short description to componentDidMount
-          vote={this.state.vote_average}
-          release_year={this.state.year}
-          description={this.state.shortOverview}
-          img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}
-        />
-      </div>
-    )
+    //TODO: Might be a good idea to move this out from the render method if it's possible, but I had no time to try it out.
+    //Don't render if state is empty
+    if (this.state.movies !== null) {
+      //Loop through the movies and render them on the screen
+      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
+      return (
+        <div className='body'>
+          {movies}
+        </div>
+      )
+    } else {
+      //render has to return something until fetch receives the movies and updates the state.
+      return null
+    }
+
   }
 }
 
