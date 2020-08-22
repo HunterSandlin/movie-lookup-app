@@ -34,14 +34,14 @@ class MovieCards extends PureComponent {
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
       .then(res => res.json())
       .then( result => {
-        moviesArr = result.results[0]
+        moviesArr = result.results
         //get shortened string
-        moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
-        //add year to title
-        moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
+        // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
+        // //add year to title
+        // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
       })
       .then(
-        () => this.setState(moviesArr),
+        () => this.setState({movies: moviesArr}),
         error => this.setState({error})
       )
     }
