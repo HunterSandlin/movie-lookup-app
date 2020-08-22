@@ -62,7 +62,7 @@ class MovieCards extends PureComponent {
     //Don't render if state is empty
     if (this.state.movies !== null) {
       //Loop through the movies and render them on the screen
-      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={movie.release_date} description={movie.overview} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
+      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
         <div className='body'>
           {movies}
