@@ -25,7 +25,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 15px 30px;
+  padding: 15px 12px;
 }
 
 .custom-control-label {
@@ -33,6 +33,30 @@
   font-size: .9rem;
   padding-top: 1.5px;
 }
+
+.modal-genre-form {
+  font-size: small;
+  /* position: fixed; */
+  height: 200px;
+  width: 250px;
+  padding: 10px;
+  /* z-index: 1500; */
+  top: calc(50vh - 150px);
+  /* left: 250px; */
+  display: flex;
+  flex-flow: column wrap;
+  border-radius: 4px;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* .modal-genre-checkbox {
+  padding: 10px 10px;
+} */
 
 Button {
   box-shadow: 0 2px 6px 1px rgba(59, 63, 87, 0.3);
@@ -66,7 +90,7 @@ Button:focus {
 }
 
 #card-description-container Button {
-  margin: auto auto 5px 5px;
+  margin: auto auto 5px 0;
 }
 
 .liveSearchCheckbox {
