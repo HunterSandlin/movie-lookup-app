@@ -6,14 +6,14 @@ import MovieCard from './MovieCard/MovieCard'
 class MovieCards extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {movies: null};
   }
 
 // Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
     let moviesArr = []
     // eslint-disable-next-line no-undef
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5 + 1)}`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
     .then(res => res.json())
     .then( result => {
       moviesArr = result.results
@@ -21,7 +21,7 @@ class MovieCards extends PureComponent {
       // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
     })
     .then(
-      () => this.setState(moviesArr),
+      () => this.setState({movies: moviesArr}),
       error => this.setState({error})
     )
   }
@@ -57,19 +57,19 @@ class MovieCards extends PureComponent {
 
 
   render() {
-    console.log(this.state);
-    if (Object.keys(this.state).length !== 0) {
-
+    if (this.state.movies !== null) {
+      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={movie.release_date} description={movie.overview} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
         <div className='body'>
-          <MovieCard
-            title={this.state[0].title}
+          {/* <MovieCard
+            title={this.state.movies[0].title}
             //TODO: add year and short description to componentDidMount
             vote={this.state.vote_average}
             release_year={this.state.year}
             description={this.state.shortOverview}
             img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}
-          />
+          /> */}
+          {movies}
         </div>
       )
     } else {
