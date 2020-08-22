@@ -26,14 +26,6 @@ class MainNav extends Component {
     }
   }
 
-  // handleKeyDown(event) {
-  //   //if it's enter, update sreachInput state and search box value
-  //   if (event.key === 'Enter') {
-  //     // event.preventDefault();
-  //     this.clearInput()
-  //   }
-  // }
-
   clearInput(event) {
     //if it's enter or submit button, update searchInput state and clear search box value
     if (event.key === 'Enter' || event.target.id === 'submitTextBox') {
@@ -41,10 +33,6 @@ class MainNav extends Component {
       this.setState({searchInput: ''});
       document.getElementById('searchTextBox').value = '';
     }
-  }
-
-  activeLink() {
-
   }
 
   render() {

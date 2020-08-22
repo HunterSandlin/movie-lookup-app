@@ -11,19 +11,17 @@ class MovieCards extends PureComponent {
 
 // Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
-    let moviesObj = {}
+    let moviesArr = []
     // eslint-disable-next-line no-undef
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${Math.floor(Math.random() * 5 + 1)}`)
     .then(res => res.json())
     .then( result => {
-      moviesObj = result.results[Math.floor(Math.random() * 20)]
-      moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
-      moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
-      console.log(moviesObj);
-      return moviesObj
+      moviesArr = result.results
+      // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
+      // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
     })
     .then(
-      () => this.setState(moviesObj),
+      () => this.setState(moviesArr),
       error => this.setState({error})
     )
   }
@@ -31,21 +29,19 @@ class MovieCards extends PureComponent {
   // Runs when state updates
   componentDidUpdate(prevProps) {
     if (this.props.search !== prevProps.search) {
-      let moviesObj = {}
+      let moviesArr = []
       // eslint-disable-next-line no-undef
       fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
       .then(res => res.json())
       .then( result => {
-        console.log(result);
-        moviesObj = result.results[0]
+        moviesArr = result.results[0]
         //get shortened string
-        moviesObj.shortOverview = this.shortenOverview(moviesObj.overview);
+        moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
         //add year to title
-        moviesObj.year = this.shortenReleaseDate(moviesObj.release_date);
-        return moviesObj
+        moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
       })
       .then(
-        () => this.setState(moviesObj),
+        () => this.setState(moviesArr),
         error => this.setState({error})
       )
     }
@@ -61,18 +57,25 @@ class MovieCards extends PureComponent {
 
 
   render() {
-    return (
-      <div className='body'>
-        <MovieCard
-          title={this.state.title}
-          //TODO: add year and short description to componentDidMount
-          vote={this.state.vote_average}
-          release_year={this.state.year}
-          description={this.state.shortOverview}
-          img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}
-        />
-      </div>
-    )
+    console.log(this.state);
+    if (Object.keys(this.state).length !== 0) {
+
+      return (
+        <div className='body'>
+          <MovieCard
+            title={this.state[0].title}
+            //TODO: add year and short description to componentDidMount
+            vote={this.state.vote_average}
+            release_year={this.state.year}
+            description={this.state.shortOverview}
+            img={`https://image.tmdb.org/t/p/w500${this.state.poster_path}`}
+          />
+        </div>
+      )
+    } else {
+      return <h1>Loading</h1>
+    }
+
   }
 }
 
