@@ -50,6 +50,10 @@
   margin: 20px 0;
 }
 
+.modal-genre-checkbox {
+  color: #5f6975;
+}
+
 .hidden {
   display: none;
 }

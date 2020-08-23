@@ -35,8 +35,10 @@ class Sidebar extends Component {
           }
         });
         break;
+      default: return
     }
   }
+
 
   render() {
     return (
