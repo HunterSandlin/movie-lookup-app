@@ -15,7 +15,7 @@
 }
 
 .sidenav {
-  z-index: 1030;
+  /* z-index: 1030; */
   height: calc(100vh - 57px);
   width: 250px;
   margin-top: 57px;
@@ -25,7 +25,11 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 15px 30px;
+  padding: 15px 25px;
+}
+
+.MuiSvgIcon-root .MuiSvgIcon-fontSizeSmall {
+  font-size: 10px!important;
 }
 
 .custom-control-label {
