@@ -10,9 +10,7 @@ import MovieCards from './Components/MovieCards/MovieCards'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = ({
-      title: ''
-    })
+    this.state = ({})
 
     //Moves search input value between from Navbar.js to movieCards.js
     this.loadSearch = (event, searchData) => {
@@ -25,9 +23,9 @@ class App extends Component {
 
     //Function to set the filters selected into app's state
     //it gets sent down as props to all subcomponents of sidebar
-    this.setSidebarFilters = (key, searchData) => {
+    this.setSidebarFilters = (filterKey, filterData) => {
       this.setState({
-        [key]: searchData,
+        [filterKey]: filterData,
       })
     }
 

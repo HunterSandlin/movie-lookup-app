@@ -13,8 +13,8 @@ const Sidebar = (props) => {
     <div className="sidenav">
       <Form>
         <DatePicker setSidebarFilters={props.setSidebarFilters}/>
-        {/* <GenreSelector setSidebarFilters={props.setSidebarFilters}/>
-        <UserRating setSidebarFilters={props.setSidebarFilters}/> */}
+        <GenreSelector setSidebarFilters={props.setSidebarFilters}/>
+        <UserRating setSidebarFilters={props.setSidebarFilters}/>
 
       </Form>
       <Form>
