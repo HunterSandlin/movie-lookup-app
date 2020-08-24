@@ -33,23 +33,25 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
 
   const classes = useStyles();
   const [value, setValue] = useState([1980, 2020]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    props.setSidebarFilters("Date", newValue);
   };
 
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Date range
+        Date Range
       </Typography>
       <Slider
         value={value}
         onChange={handleChange}
+        onChangeCommitted={handleChange}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}

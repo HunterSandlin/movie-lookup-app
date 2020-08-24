@@ -22,13 +22,22 @@ class App extends Component {
         })
       }
     }
+
+    //Function to set the filters selected into app's state
+    //it gets sent down as props to all subcomponents of sidebar
+    this.setSidebarFilters = (key, searchData) => {
+      this.setState({
+        [key]: searchData,
+      })
+    }
+
   }
 
   render() {
     return (
       <>
         <MainNav submitSearch={this.loadSearch}/>
-        <Sidebar />
+        <Sidebar setSidebarFilters={this.setSidebarFilters} />
         <MovieCards search={this.state.title}/>
       </>
     );

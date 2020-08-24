@@ -29,7 +29,7 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function UserRating() {
+export default function UserRating(props) {
 
   const classes = useStyles();
   const [value, setValue] = useState([5, 10]);
