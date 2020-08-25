@@ -36,7 +36,7 @@ export default function UserRating(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.setSidebarFilters("Rating", newValue);
+    props.setSidebarFilters("rating", newValue);
   };
 
   return (

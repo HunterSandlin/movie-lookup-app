@@ -10,9 +10,14 @@ import MovieCards from './Components/MovieCards/MovieCards'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = ({})
+    this.state = ({
+      title: '',
+      date: [1900, 2020],
+      rating: [0, 10],
+      genres: ''
+    })
 
-    //Moves search input value between from Navbar.js to movieCards.js
+    //Moves search input value from Navbar.js to movieCards.js
     this.loadSearch = (event, searchData) => {
       if (event.key !== 'Backspace') {
         this.setState({
@@ -122,8 +127,13 @@ class App extends Component {
           isAdded: false,
         }
       ];
-
-      if (filterKey === 'genres') {
+      if (filterKey === 'date') {
+        const sortedDate = filterData.sort()
+        console.log(sortedDate);
+        this.setState({
+          [filterKey]: sortedDate,
+        })
+      } else if (filterKey === 'genres') {
 
         filterData.map((o) => {
           for(let i = 0; i < genres.length; i++) {
@@ -131,24 +141,24 @@ class App extends Component {
                 genres[i].isAdded = !genres[i].isAdded;
             }
           }
+
+          genres.map((item) => {
+            if (item.isAdded === true) {
+              genresIDString += `${item.ID},`
+            }
+
+            this.setState({
+              [filterKey]: genresIDString,
+            })
+            return true
+          })
           return true
-      });
-
-      genres.map((item) => {
-        if (item.isAdded === true) {
-          genresIDString += `${item.ID},`
-        }
-
-        this.setState({
-          [filterKey]: genresIDString,
-        })
-        return true
-      })
-
-      } else {
+      })} else {
+        console.log(filterData);
         this.setState({
           [filterKey]: filterData,
         })
+        return true
       }
     }
   }
@@ -158,7 +168,7 @@ class App extends Component {
       <>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres}/>
+        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating}/>
       </>
     );
   }

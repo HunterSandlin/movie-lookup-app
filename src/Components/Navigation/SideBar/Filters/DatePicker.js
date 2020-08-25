@@ -40,7 +40,7 @@ export default function RangeSlider(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.setSidebarFilters("Date", newValue);
+    props.setSidebarFilters("date", newValue);
   };
 
   return (

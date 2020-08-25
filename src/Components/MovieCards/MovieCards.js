@@ -17,9 +17,6 @@ class MovieCards extends PureComponent {
     .then(res => res.json())
     .then( result => {
       moviesArr = result.results
-      //TODO: Fix description shortening on the cards
-      // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
-      // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
     })
     .then(
       () => this.setState({movies: moviesArr}),
@@ -29,18 +26,15 @@ class MovieCards extends PureComponent {
 
   // Runs when state updates
   componentDidUpdate(prevProps) {
+    console.log(this.props);
     if (this.props !== prevProps) {
       let moviesArr = []
       // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_keywords=${this.props.search}&with_genres=${this.props.genres}`)
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
       .then(res => res.json())
       .then( result => {
         moviesArr = result.results
         console.log(moviesArr);
-        //get shortened string
-        // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
-        // //add year to title
-        // moviesArr.year = this.shortenReleaseDate(moviesArr.release_date);
       })
       .then(
         () => this.setState({movies: moviesArr}),
@@ -73,7 +67,6 @@ class MovieCards extends PureComponent {
       //render has to return something until fetch receives the movies and updates the state.
       return null
     }
-
   }
 }
 
