@@ -24,6 +24,7 @@ class App extends Component {
     //Function to set the filters selected into app's state
     //it gets sent down as props to all subcomponents of sidebar
     this.setSidebarFilters = (filterKey, filterData) => {
+      let genresIDString = ''
       const genres = [
         {
           genre: 'Action',
@@ -132,10 +133,19 @@ class App extends Component {
           }
       });
 
-      }
-      this.setState({
-        [filterKey]: filterData,
+      genres.map((item) => {
+        if (item.isAdded === true) {
+          genresIDString += `${item.ID},`
+        }
+        this.setState({
+          [filterKey]: genresIDString,
+        })
       })
+      } else {
+        this.setState({
+          [filterKey]: filterData,
+        })
+      }
     }
   }
 
