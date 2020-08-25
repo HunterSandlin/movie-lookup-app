@@ -129,9 +129,14 @@ class App extends Component {
       ];
       if (filterKey === 'date') {
         const sortedDate = filterData.sort()
-        console.log(sortedDate);
         this.setState({
           [filterKey]: sortedDate,
+        })
+      } else if (filterKey === 'rating') {
+        filterData.sort((a, b) => a - b);
+        console.log(filterData);
+        this.setState({
+          [filterKey]: filterData,
         })
       } else if (filterKey === 'genres') {
 
@@ -154,7 +159,6 @@ class App extends Component {
           })
           return true
       })} else {
-        console.log(filterData);
         this.setState({
           [filterKey]: filterData,
         })
