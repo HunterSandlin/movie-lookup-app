@@ -27,7 +27,22 @@ class MovieCards extends PureComponent {
   // Runs when state updates
   componentDidUpdate(prevProps) {
     console.log(this.props);
-    if (this.props !== prevProps) {
+
+    if (this.props.search !== prevProps.search) {
+      let moviesArr = []
+      console.log('search');
+      // eslint-disable-next-line no-undef
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
+      .then(res => res.json())
+      .then( result => {
+        moviesArr = result.results
+        console.log(moviesArr);
+      })
+      .then(
+        () => this.setState({movies: moviesArr}),
+        error => this.setState({error})
+      )
+    } else if (this.props !== prevProps){
       let moviesArr = []
       // eslint-disable-next-line no-undef
       fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)

@@ -127,19 +127,21 @@ class App extends Component {
           isAdded: false,
         }
       ];
+
       if (filterKey === 'date') {
         const sortedDate = filterData.sort()
         this.setState({
           [filterKey]: sortedDate,
         })
+
       } else if (filterKey === 'rating') {
         filterData.sort((a, b) => a - b);
         console.log(filterData);
         this.setState({
           [filterKey]: filterData,
         })
-      } else if (filterKey === 'genres') {
 
+      } else if (filterKey === 'genres') {
         filterData.map((o) => {
           for(let i = 0; i < genres.length; i++) {
             if (o === genres[i].genre) {
@@ -151,14 +153,15 @@ class App extends Component {
             if (item.isAdded === true) {
               genresIDString += `${item.ID},`
             }
-
             this.setState({
               [filterKey]: genresIDString,
             })
             return true
           })
           return true
-      })} else {
+        })
+      } else {
+
         this.setState({
           [filterKey]: filterData,
         })
