@@ -12,20 +12,16 @@ const useStyles = makeStyles({
 
 const marks = [
   {
-    value: 1900,
-    label: '1900',
+    value: 0,
+    label: '0',
   },
   {
-    value: 1940,
-    label: '1940',
+    value: 5,
+    label: '5',
   },
   {
-    value: 1980,
-    label: '1980',
-  },
-  {
-    value: 2020,
-    label: '2020',
+    value: 10,
+    label: '10',
   },
 ];
 
@@ -33,30 +29,30 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export default function RangeSlider(props) {
+export default function UserRating(props) {
 
   const classes = useStyles();
-  const [value, setValue] = useState([1980, 2020]);
+  const [value, setValue] = useState([5, 10]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.setSidebarFilters("date", newValue);
+    props.setSidebarFilters("rating", newValue);
   };
 
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Date Range
+        User Ratings
       </Typography>
       <Slider
         value={value}
         onChange={handleChange}
-        onChangeCommitted={handleChange}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={1900}
-        max={2020}
+        min={0}
+        max={10}
+        steps={1}
         marks={marks}
       />
     </div>
