@@ -43,104 +43,108 @@ class App extends Component {
         },
         {
           genre: 'Comedy',
-          ID: 28,
+          ID: 35,
           isAdded: false,
         },
         {
           genre: 'Crime',
-          ID: 28,
+          ID: 80,
           isAdded: false,
         },
         {
           genre: 'Documentary',
-          ID: 28,
+          ID: 99,
           isAdded: false,
         },
         {
           genre: 'Drama',
-          ID: 28,
+          ID: 18,
           isAdded: false,
         },
         {
           genre: 'Family',
-          ID: 28,
+          ID: 10751,
           isAdded: false,
         },
         {
           genre: 'Fantasy',
-          ID: 28,
+          ID: 14,
           isAdded: false,
         },
         {
           genre: 'History',
-          ID: 28,
+          ID: 36,
           isAdded: false,
         },
         {
           genre: 'Horror',
-          ID: 28,
+          ID: 27,
           isAdded: false,
         },
         {
           genre: 'Music',
-          ID: 28,
+          ID: 10402,
           isAdded: false,
         },
         {
           genre: 'Mystery',
-          ID: 28,
+          ID: 9648,
           isAdded: false,
         },
         {
           genre: 'Romance',
-          ID: 28,
+          ID: 10749,
           isAdded: false,
         },
         {
           genre: 'Science Fiction',
-          ID: 28,
+          ID: 878,
           isAdded: false,
         },
         {
           genre: 'TV Movie',
-          ID: 28,
+          ID: 10770,
           isAdded: false,
         },
         {
           genre: 'Thriller',
-          ID: 28,
+          ID: 53,
           isAdded: false,
         },
         {
           genre: 'War',
-          ID: 28,
+          ID: 10752,
           isAdded: false,
         },
         {
           genre: 'Western',
-          ID: 28,
+          ID: 37,
           isAdded: false,
         }
       ];
-      console.log(filterData);
+
       if (filterKey === 'genres') {
+
         filterData.map((o) => {
           for(let i = 0; i < genres.length; i++) {
             if (o === genres[i].genre) {
                 genres[i].isAdded = !genres[i].isAdded;
-                console.log(genres);
             }
           }
+          return true
       });
 
       genres.map((item) => {
         if (item.isAdded === true) {
           genresIDString += `${item.ID},`
         }
+
         this.setState({
           [filterKey]: genresIDString,
         })
+        return true
       })
+
       } else {
         this.setState({
           [filterKey]: filterData,
@@ -154,7 +158,7 @@ class App extends Component {
       <>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title}/>
+        <MovieCards search={this.state.title} genres={this.state.genres}/>
       </>
     );
   }

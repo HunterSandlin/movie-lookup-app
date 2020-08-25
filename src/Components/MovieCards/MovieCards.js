@@ -29,13 +29,14 @@ class MovieCards extends PureComponent {
 
   // Runs when state updates
   componentDidUpdate(prevProps) {
-    if (this.props.search !== prevProps.search) {
+    if (this.props !== prevProps) {
       let moviesArr = []
       // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_keywords=${this.props.search}&with_genres=${this.props.genres}`)
       .then(res => res.json())
       .then( result => {
         moviesArr = result.results
+        console.log(moviesArr);
         //get shortened string
         // moviesArr.shortOverview = this.shortenOverview(moviesArr.overview);
         // //add year to title
