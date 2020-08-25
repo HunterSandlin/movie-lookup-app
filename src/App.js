@@ -24,11 +24,119 @@ class App extends Component {
     //Function to set the filters selected into app's state
     //it gets sent down as props to all subcomponents of sidebar
     this.setSidebarFilters = (filterKey, filterData) => {
+      const genres = [
+        {
+          genre: 'Action',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Adventure',
+          ID: 12,
+          isAdded: false,
+        },
+        {
+          genre: 'Animation',
+          ID: 16,
+          isAdded: false,
+        },
+        {
+          genre: 'Comedy',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Crime',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Documentary',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Drama',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Family',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Fantasy',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'History',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Horror',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Music',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Mystery',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Romance',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Science Fiction',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'TV Movie',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Thriller',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'War',
+          ID: 28,
+          isAdded: false,
+        },
+        {
+          genre: 'Western',
+          ID: 28,
+          isAdded: false,
+        }
+      ];
+      console.log(filterData);
+      if (filterKey === 'genres') {
+        filterData.map((o) => {
+          for(let i = 0; i < genres.length; i++) {
+            if (o === genres[i].genre) {
+                genres[i].isAdded = !genres[i].isAdded;
+                console.log(genres);
+            }
+          }
+      });
+
+      }
       this.setState({
         [filterKey]: filterData,
       })
     }
-
   }
 
   render() {
