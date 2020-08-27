@@ -12,7 +12,6 @@ class MovieCards extends PureComponent {
       searchPage: 1
     };
     this.moviesArr = []
-    // this.fetchedSearchPage = Number
   }
 
 // Initial state: picks a random movie from the 100 most popular movies
@@ -33,7 +32,7 @@ class MovieCards extends PureComponent {
 
     } else if (this.props !== prevProps){
       this.moviesArr = []
-      this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
+      this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
     }
   }
 
@@ -54,7 +53,8 @@ class MovieCards extends PureComponent {
   async searchMovie(URL) {
     try {
       const res = await fetch(URL)
-      const resJSON =  await res.json()
+      const resJSON = await res.json()
+      console.log(this.moviesArr);
       this.moviesArr = this.moviesArr.concat(resJSON.results)
       this.setState({movies: this.moviesArr})
       return true
@@ -69,19 +69,15 @@ class MovieCards extends PureComponent {
     //Don't render if state is empty
     if (this.state.movies !== null) {
       //Loop through the movies and render them on the screen
-      console.log(this.state.movies);
       const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={!movie.poster_path ? "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" :`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
         <>
-        <div >
           <div className='body'>
             {movies}
-            {k}
+            <div>
             <Button className="load-more-button" onClick={() => this.incrementPage(this.state.searchPage)}>Load more results</Button>
+            </div>
           </div>
-
-        </div>
-
         </>
       )
     } else {
