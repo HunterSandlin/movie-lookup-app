@@ -17,17 +17,7 @@ class MovieCards extends PureComponent {
 
 // Initial state: picks a random movie from the 100 most popular movies
   componentDidMount() {
-    // eslint-disable-next-line no-undef
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.page}`)
-    .then(res => res.json())
-    .then( result => {
-      this.moviesArr = result.results
-      console.log(this.moviesArr);
-    })
-    .then(
-      () => this.setState({movies: this.moviesArr}),
-      error => this.setState({error})
-    )
+    this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.Searchpage}`)
   }
 
   // Runs when state updates
@@ -36,43 +26,14 @@ class MovieCards extends PureComponent {
     if (this.props.search !== prevProps.search) {
       this.moviesArr = []
       this.searchPage = 1
-      // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
-      .then(res => res.json())
-      .then( result => {
-        this.moviesArr = result.results
-        console.log(result.results);
-      })
-      .then(
-        () => this.setState({movies: this.moviesArr}),
-        error => this.setState({error})
-      )
+      this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
+
     } else if (prevState.searchPage !== this.state.searchPage) {
-      // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=2&include_adult=false`)
-      .then(res => res.json())
-      .then( result => {
-        // this.moviesArr = [...this.moviesArr, ...result.results]
-        this.moviesArr = this.moviesArr.concat(result.results)
-        console.log(this.moviesArr)
-      })
-      .then(
-        () => this.setState({movies: this.moviesArr}),
-        error => this.setState({error})
-      )
+      this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=${this.state.searchPage}&include_adult=false`)
+
     } else if (this.props !== prevProps){
       this.moviesArr = []
-      // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
-      .then(res => res.json())
-      .then( result => {
-        this.moviesArr = result.results
-        console.log(this.moviesArr);
-      })
-      .then(
-        () => this.setState({movies: this.moviesArr}),
-        error => this.setState({error})
-      )
+      this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
     }
   }
 
@@ -90,6 +51,18 @@ class MovieCards extends PureComponent {
     this.setState({searchPage: pageNumber})
   }
 
+  async searchMovie(URL) {
+    try {
+      const res = await fetch(URL)
+      const resJSON =  await res.json()
+      this.moviesArr = this.moviesArr.concat(resJSON.results)
+      this.setState({movies: this.moviesArr})
+      return true
+    } catch (error) {
+      this.setState({error})
+    }
+  }
+
 
   render() {
     //TODO: Might be a good idea to move this out from the render method if it's possible, but I had no time to try it out.
@@ -103,6 +76,7 @@ class MovieCards extends PureComponent {
         <div >
           <div className='body'>
             {movies}
+            {k}
             <Button className="load-more-button" onClick={() => this.incrementPage(this.state.searchPage)}>Load more results</Button>
           </div>
 
