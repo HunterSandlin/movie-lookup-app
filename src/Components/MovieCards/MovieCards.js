@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import {Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MovieCard from './MovieCard/MovieCard'
@@ -98,10 +99,16 @@ class MovieCards extends PureComponent {
       console.log(this.state.movies);
       const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
-        <div className='body'>
-          {movies}
-          <button onClick={() => this.incrementPage(this.state.searchPage)}>Load more results</button>
+        <>
+        <div >
+          <div className='body'>
+            {movies}
+            <Button className="load-more-button" onClick={() => this.incrementPage(this.state.searchPage)}>Load more results</Button>
+          </div>
+
         </div>
+
+        </>
       )
     } else {
       //render has to return something until fetch receives the movies and updates the state.
