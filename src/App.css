@@ -63,6 +63,11 @@ Button:focus {
   box-shadow: 2px 2px 10px 5px rgba(107, 107, 107, 0.2);
 }
 
+.card-img-top {
+  width: 350px;
+  height: 525px;
+}
+
 #card-description-container {
   display: flex;
   justify-content: space-between;
