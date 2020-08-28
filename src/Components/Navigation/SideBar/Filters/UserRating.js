@@ -32,7 +32,7 @@ function valuetext(value) {
 export default function UserRating(props) {
 
   const classes = useStyles();
-  const [value, setValue] = useState([5, 10]);
+  const [value, setValue] = useState([0, 10]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

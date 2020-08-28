@@ -36,7 +36,7 @@ function valuetext(value) {
 export default function RangeSlider(props) {
 
   const classes = useStyles();
-  const [value, setValue] = useState([1980, 2020]);
+  const [value, setValue] = useState([1900, 2020]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
