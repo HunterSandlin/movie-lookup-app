@@ -127,45 +127,45 @@ class App extends Component {
           isAdded: false,
         }
       ];
+      let sortedDate = []
 
-      if (filterKey === 'date') {
-        const sortedDate = filterData.sort()
-        this.setState({
-          [filterKey]: sortedDate,
-        })
-
-      } else if (filterKey === 'rating') {
-        filterData.sort((a, b) => a - b);
-        console.log(filterData);
-        this.setState({
-          [filterKey]: filterData,
-        })
-
-      } else if (filterKey === 'genres') {
-        filterData.map((o) => {
-          for(let i = 0; i < genres.length; i++) {
-            if (o === genres[i].genre) {
-                genres[i].isAdded = !genres[i].isAdded;
+      switch(filterKey) {
+        case 'date':
+          sortedDate = filterData.sort()
+          this.setState({
+            [filterKey]: sortedDate,
+          })
+          break
+        case 'rating':
+          filterData.sort((a, b) => a - b);
+          this.setState({
+            [filterKey]: filterData,
+          })
+          break
+        case 'genres':
+          filterData.map((o) => {
+            for(let i = 0; i < genres.length; i++) {
+              if (o === genres[i].genre) {
+                  genres[i].isAdded = !genres[i].isAdded;
+              }
             }
-          }
 
-          genres.map((item) => {
-            if (item.isAdded === true) {
-              genresIDString += `${item.ID},`
-            }
-            this.setState({
-              [filterKey]: genresIDString,
+            genres.map((item) => {
+              if (item.isAdded === true) {
+                genresIDString += `${item.ID},`
+              }
+              this.setState({
+                [filterKey]: genresIDString,
+              })
+              return true
             })
             return true
           })
-          return true
-        })
-      } else {
-
+          break
+        default:
         this.setState({
           [filterKey]: filterData,
         })
-        return true
       }
     }
   }
