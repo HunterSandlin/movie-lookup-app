@@ -14,7 +14,8 @@ class App extends Component {
       title: '',
       date: [1900, 2020],
       rating: [0, 10],
-      genres: ''
+      genres: '',
+      searchType: ''
     })
 
     //Moves search input value from Navbar.js to movieCards.js
@@ -22,6 +23,7 @@ class App extends Component {
       if (event.key !== 'Backspace') {
         this.setState({
           title: searchData,
+          searchType: 'search'
         })
       }
     }
@@ -127,45 +129,48 @@ class App extends Component {
           isAdded: false,
         }
       ];
+      let sortedDate = []
+      this.setState({
+        searchType: 'discover',
+      })
 
-      if (filterKey === 'date') {
-        const sortedDate = filterData.sort()
-        this.setState({
-          [filterKey]: sortedDate,
-        })
-
-      } else if (filterKey === 'rating') {
-        filterData.sort((a, b) => a - b);
-        console.log(filterData);
-        this.setState({
-          [filterKey]: filterData,
-        })
-
-      } else if (filterKey === 'genres') {
-        filterData.map((o) => {
-          for(let i = 0; i < genres.length; i++) {
-            if (o === genres[i].genre) {
-                genres[i].isAdded = !genres[i].isAdded;
+      switch(filterKey) {
+        case 'date':
+          sortedDate = filterData.sort()
+          this.setState({
+            [filterKey]: sortedDate,
+          })
+          break
+        case 'rating':
+          filterData.sort((a, b) => a - b);
+          this.setState({
+            [filterKey]: filterData,
+          })
+          break
+        case 'genres':
+          filterData.map((o) => {
+            for(let i = 0; i < genres.length; i++) {
+              if (o === genres[i].genre) {
+                  genres[i].isAdded = !genres[i].isAdded;
+              }
             }
-          }
 
-          genres.map((item) => {
-            if (item.isAdded === true) {
-              genresIDString += `${item.ID},`
-            }
-            this.setState({
-              [filterKey]: genresIDString,
+            genres.map((item) => {
+              if (item.isAdded === true) {
+                genresIDString += `${item.ID},`
+              }
+              this.setState({
+                [filterKey]: genresIDString,
+              })
+              return true
             })
             return true
           })
-          return true
-        })
-      } else {
-
+          break
+        default:
         this.setState({
           [filterKey]: filterData,
         })
-        return true
       }
     }
   }
@@ -177,7 +182,7 @@ class App extends Component {
       <>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating}/>
+        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType}/>
       </>
     );
   }

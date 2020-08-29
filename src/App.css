@@ -119,6 +119,12 @@ padding: 10px 38.5px;
   color: #5f6975;
 }
 
+.pagination > * {
+  margin: 20px 20px 40px 20px;
+  padding: 15px 30px!important;
+  background-color: red!important;
+}
+
 .green {
   background-color: green;
 }
