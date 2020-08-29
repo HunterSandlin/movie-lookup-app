@@ -31,16 +31,18 @@ class MovieCards extends PureComponent {
       this.setState({searchPage: 1})
       this.moviesArr = []
       this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=${this.state.searchPage}&include_adult=false`)
-
+      return
     } else if (prevState.searchPage !== this.state.searchPage && this.props.searchType === 'search') {
       console.log('changing search page');
       this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=${this.state.searchPage}&include_adult=false`)
       this.handleScroll()
+      return
 
     } else if (prevState.searchPage !== this.state.searchPage && this.props.searchType === 'discover' && this.state.isFilterChanged === false) {
       console.log('changing filter page');
       this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
       this.handleScroll()
+      return
 
     } else if (this.props !== prevProps){
       console.log('filter has changed');
@@ -50,6 +52,7 @@ class MovieCards extends PureComponent {
       })
       this.moviesArr = []
       this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
+      return
     }
   }
 
@@ -61,8 +64,13 @@ class MovieCards extends PureComponent {
     return(fullDate.split("-")[0])
   }
 
-  incrementPage (pageNumber) {
-    pageNumber = pageNumber + 1
+  changePage (pageNumber , change) {
+    if(change === '+') {
+      pageNumber = pageNumber + 1
+    } else if (change === '-') {
+      pageNumber = pageNumber - 1
+    }
+
     console.log(pageNumber);
     this.setState({
       searchPage: pageNumber,
@@ -103,9 +111,10 @@ class MovieCards extends PureComponent {
         <>
           <div className='body' id="card-container" ref={this.childDiv}>
             {movies}
-            {this.isRecommendationPage ? null : (<div>
-            <Button className="load-more-button" onClick={() => this.incrementPage(this.state.searchPage)}>Load next 20</Button>
-            </div>)}
+            <div className='pagination'>
+              {this.isRecommendationPage || this.state.searchPage === 1 ? null : <Button className="load-more-button" onClick={() => this.changePage(this.state.searchPage, '-')}>Previous 20</Button>}
+              {this.isRecommendationPage ? null : <Button className="load-more-button" onClick={() => this.changePage(this.state.searchPage, '+')}>Next 20</Button>}
+            </div>
           </div>
         </>
       )
