@@ -6,6 +6,8 @@ import DatePicker from './Filters/DatePicker';
 import GenreSelector from './Filters/GenreSelector';
 import ThemeChanger from './Utils/ThemeChanger';
 import UserRating from './Filters/UserRating';
+import Sort from './Filters/Sort';
+
 
 const Sidebar = (props) => {
 
@@ -18,6 +20,7 @@ const Sidebar = (props) => {
 
       </Form>
       <Form>
+        <Sort setSidebarFilters={props.setSidebarFilters}/>
         <ThemeChanger />
       </Form>
     </div>
