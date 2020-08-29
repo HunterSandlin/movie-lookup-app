@@ -15,7 +15,8 @@ class App extends Component {
       date: [1900, 2020],
       rating: [0, 10],
       genres: '',
-      searchType: ''
+      searchType: '',
+      sort: 'popularity.desc'
     })
 
     //Moves search input value from Navbar.js to movieCards.js
@@ -182,7 +183,7 @@ class App extends Component {
       <>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType}/>
+        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort}/>
       </>
     );
   }
