@@ -28,20 +28,12 @@ class MovieCards extends PureComponent {
   componentDidUpdate(prevProps) {
     console.log(this.props);
 
-    if (this.props.search !== prevProps.search) {
-      let moviesArr = []
-      console.log('search');
-      // eslint-disable-next-line no-undef
-      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=1&include_adult=false`)
-      .then(res => res.json())
-      .then( result => {
-        moviesArr = result.results
-        console.log(moviesArr);
-      })
-      .then(
-        () => this.setState({movies: moviesArr}),
-        error => this.setState({error})
-      )
+    } else if (prevState.searchPage !== this.state.searchPage && this.props.searchType === 'discover' && this.state.isFilterChanged === false) {
+      console.log('changing filter page');
+      this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=${this.props.sort}&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
+      // this.handleScroll()
+      return
+
     } else if (this.props !== prevProps){
       let moviesArr = []
       // eslint-disable-next-line no-undef
@@ -51,10 +43,10 @@ class MovieCards extends PureComponent {
         moviesArr = result.results
         console.log(moviesArr);
       })
-      .then(
-        () => this.setState({movies: moviesArr}),
-        error => this.setState({error})
-      )
+      this.moviesArr = []
+      this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=${this.props.sort}&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
+      // this.handleScroll()
+      return
     }
   }
 
@@ -64,6 +56,36 @@ class MovieCards extends PureComponent {
 
   shortenReleaseDate(fullDate) {
     return(fullDate.split("-")[0])
+  }
+
+
+    console.log(pageNumber);
+    this.setState({
+      searchPage: pageNumber,
+      isFilterChanged: false
+    })
+  }
+
+  async searchMovie(URL) {
+    try {
+      const res = await fetch(URL)
+      const resJSON = await res.json()
+      this.moviesArr = this.moviesArr.concat(resJSON.results)
+      this.setState({movies: this.moviesArr})
+      this.moviesArr = []
+      return true
+    } catch (error) {
+      this.setState({error})
+    }
+  }
+
+  handleScroll() {
+    const { index, selected } = this.props
+    if (index === selected) {
+      setTimeout(() => {
+        this.childDiv.current.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
   }
 
 

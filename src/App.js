@@ -14,7 +14,9 @@ class App extends Component {
       title: '',
       date: [1900, 2020],
       rating: [0, 10],
-      genres: ''
+      genres: '',
+      searchType: '',
+      sort: 'popularity.desc'
     })
 
     //Moves search input value from Navbar.js to movieCards.js
@@ -128,24 +130,26 @@ class App extends Component {
         }
       ];
 
-      if (filterKey === 'date') {
-        const sortedDate = filterData.sort()
-        this.setState({
-          [filterKey]: sortedDate,
-        })
-
-      } else if (filterKey === 'rating') {
-        filterData.sort((a, b) => a - b);
-        console.log(filterData);
-        this.setState({
-          [filterKey]: filterData,
-        })
-
-      } else if (filterKey === 'genres') {
-        filterData.map((o) => {
-          for(let i = 0; i < genres.length; i++) {
-            if (o === genres[i].genre) {
-                genres[i].isAdded = !genres[i].isAdded;
+      switch(filterKey) {
+        case 'date':
+          sortedDate = filterData.sort()
+          this.setState({
+            [filterKey]: sortedDate,
+          })
+          break
+        case 'rating':
+          filterData.sort((a, b) => a - b);
+          this.setState({
+            [filterKey]: filterData,
+          })
+          break
+        case 'genres':
+          console.log(this.genres);
+          filterData.map((o) => {
+            for(let i = 0; i < genres.length; i++) {
+              if (o === genres[i].genre) {
+                  genres[i].isAdded = !genres[i].isAdded;
+              }
             }
           }
 
@@ -158,10 +162,9 @@ class App extends Component {
             })
             return true
           })
-          return true
-        })
-      } else {
-
+          break
+        default:
+          console.log(this.state);
         this.setState({
           [filterKey]: filterData,
         })
@@ -175,7 +178,7 @@ class App extends Component {
       <>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating}/>
+        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort}/>
       </>
     );
   }

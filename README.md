@@ -16,7 +16,8 @@ This app is made up of three main sections. The top menu is the navigation bar, 
 - [Form elements](https://react-bootstrap.netlify.app/components/forms/)
 - [Date picker and user rating sliders](https://material-ui.com/components/slider/#range-slider)
 - [Genre autocomplete](https://material-ui.com/components/selects/#multiple-select)
-- [Dark mode switch](https://react-bootstrap.netlify.app/components/forms/#forms-custom-switch)
+- [Sort select](https://material-ui.com/components/selects/#simple-select)
+- [Dark mode switch](https://react-bootstrap.netlify.app/components/forms/#forms-custom-swihttps://material-ui.com/components/selects/#simple-selecttch)
 
 #### Movies panel
 - [Movie cards](https://react-bootstrap.netlify.app/components/cards/)
