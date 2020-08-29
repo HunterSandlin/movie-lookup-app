@@ -9,7 +9,8 @@ class MovieCards extends PureComponent {
     super(props);
     this.state = {
       movies: null,
-      searchPage: 1
+      searchPage: 1,
+      isFilterChanged: false
     };
     this.moviesArr = []
     this.childDiv = React.createRef()
@@ -23,21 +24,32 @@ class MovieCards extends PureComponent {
 
   // Runs when state updates
   componentDidUpdate(prevProps, prevState) {
+    console.log(this.props);
+    this.isRecommendationPage = false
     if (this.props.search !== prevProps.search) {
+      console.log('searching for movie');
       this.setState({searchPage: 1})
       this.moviesArr = []
       this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=${this.state.searchPage}&include_adult=false`)
-      this.isRecommendationPage = false
 
-    } else if (prevState.searchPage !== this.state.searchPage) {
+    } else if (prevState.searchPage !== this.state.searchPage && this.props.searchType === 'search') {
+      console.log('changing search page');
       this.searchMovie(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${this.props.search}&page=${this.state.searchPage}&include_adult=false`)
       this.handleScroll()
-      this.isRecommendationPage = false
+
+    } else if (prevState.searchPage !== this.state.searchPage && this.props.searchType === 'discover' && this.state.isFilterChanged === false) {
+      console.log('changing filter page');
+      this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
+      this.handleScroll()
 
     } else if (this.props !== prevProps){
+      console.log('filter has changed');
+      this.setState({
+        searchPage: 1,
+        isFilterChanged: true
+      })
       this.moviesArr = []
       this.searchMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.searchPage}&primary_release_date.gte=${this.props.dateRange[0]}-01-01&primary_release_date.lte=${this.props.dateRange[1]}-01-01&with_genres=${this.props.genres}&vote_average.gte=${this.props.ratings[0]}&vote_average.lte=${this.props.ratings[1]}`)
-      this.isRecommendationPage = false
     }
   }
 
@@ -52,14 +64,16 @@ class MovieCards extends PureComponent {
   incrementPage (pageNumber) {
     pageNumber = pageNumber + 1
     console.log(pageNumber);
-    this.setState({searchPage: pageNumber})
+    this.setState({
+      searchPage: pageNumber,
+      isFilterChanged: false
+    })
   }
 
   async searchMovie(URL) {
     try {
       const res = await fetch(URL)
       const resJSON = await res.json()
-      console.log(this.moviesArr);
       this.moviesArr = this.moviesArr.concat(resJSON.results)
       this.setState({movies: this.moviesArr})
       this.moviesArr = []
