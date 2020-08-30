@@ -26,22 +26,23 @@ export default function MovieDetails(props) {
     return `${hours}h ${minutes}m`
   }
 
-
   return (
-    <div className={`modal-container ${props.isModal ? 'show' : 'hide'}`}>
-      <Button onClick={props.closeModal}>X</Button>
-      <h1>{movieData.original_title}</h1>
-      <h2>{movieData.tagline}</h2>
-      <Card.Img id='movie-details-img' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}/>
-      <p>OverView: {movieData.overview}</p>
-      <h3>Genres:</h3>
-      <ul>
-        {genreList}
-      </ul>
-      <p>Status: {movieData.status}</p>
-      <p>Release Date: {movieData.release_date}</p>
-      <p>User rating: {movieData.vote_average}/10 of {movieData.vote_count} votes</p>
-      <p>Runtime: {makeTime()}</p>
+    <div className={`modal-container ${props.isModal ? 'show' : 'hide'}`} >
+      <div className='modal-body'>
+        <Button id='modal-close-button' onClick={props.closeModal}>X</Button>
+        <h1>{movieData.original_title}</h1>
+        <h2>{movieData.tagline}</h2>
+        <Card.Img id='movie-details-img' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}/>
+        <p>OverView: {movieData.overview}</p>
+        <h3>Genres:</h3>
+        <ul>
+          {genreList}
+        </ul>
+        <p>Status: {movieData.status}</p>
+        <p>Release Date: {movieData.release_date}</p>
+        <p>User rating: {movieData.vote_average}/10 of {movieData.vote_count} votes</p>
+        <p>Runtime: {makeTime()}</p>
+      </div>
     </div>
   )
 }
