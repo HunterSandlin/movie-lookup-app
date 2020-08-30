@@ -24,7 +24,7 @@ const MovieCard = props => {
 
       <Card.Body id="card-description-container">
         <Card.Text id="card-description">{props.description}</Card.Text>
-        <Button variant="primary">Details</Button>
+        <Button variant="primary" onClick={props.showModal}>Details</Button>
       </Card.Body>
     </Card>
   )

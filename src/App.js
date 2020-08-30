@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MainNav from './Components/Navigation/MainNav/Navbar';
 import Sidebar from './Components/Navigation/SideBar/Sidebar';
-import MovieCards from './Components/MovieCards/MovieCards'
+import MovieCards from './Components/MovieCards/MovieCards';
+import MovieDetails from './Components/MovieCards/MovieDetails/MovieDetails';
+
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ class App extends Component {
       rating: [0, 10],
       genres: '',
       searchType: '',
-      sort: 'popularity.desc'
+      sort: 'popularity.desc',
+      isModal: true
     })
 
     //Moves search input value from Navbar.js to movieCards.js
@@ -28,6 +31,14 @@ class App extends Component {
         })
       }
     }
+
+    this.showModal = () => {
+      this.setState({ isModal: true });
+    };
+
+    this.hideModal = () => {
+      this.setState({ isModal: false });
+    };
 
     //Function to set the filters selected into app's state
     //it gets sent down as props to all subcomponents of sidebar
@@ -181,9 +192,10 @@ class App extends Component {
   render() {
     return (
       <>
+        <MovieDetails isModal={this.state.isModal} closeModal={this.hideModal}/>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort}/>
+        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort} showModal={this.showModal}/>
       </>
     );
   }
