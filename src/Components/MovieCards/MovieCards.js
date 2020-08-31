@@ -24,7 +24,6 @@ class MovieCards extends PureComponent {
 
   // Runs when state updates
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
     this.isRecommendationPage = false
     if (this.props.search !== prevProps.search) {
       console.log('searching for movie');
@@ -55,7 +54,9 @@ class MovieCards extends PureComponent {
       // this.handleScroll()
       return
     }
-    this.handleScroll()
+    if (this.props.details !== prevProps.details) {
+      this.handleScroll()
+    }
   }
 
   shortenOverview(details) {
@@ -108,7 +109,7 @@ class MovieCards extends PureComponent {
     //Don't render if state is empty
     if (this.state.movies !== null) {
       //Loop through the movies and render them on the screen
-      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={!movie.poster_path ? "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" :`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
+      const movies = this.state.movies.map(movie => <MovieCard key={movie.id} details={this.props.details} id={movie.id} showModal={this.props.showModal} title={movie.title} vote={movie.vote_average} release_year={this.shortenReleaseDate(movie.release_date)} description={this.shortenOverview(movie.overview)} img={!movie.poster_path ? "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" :`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>);
       return (
         <>
           <div className='body' id="card-container" ref={this.childDiv}>
