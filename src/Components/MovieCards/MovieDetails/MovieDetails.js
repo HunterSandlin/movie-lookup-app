@@ -33,7 +33,7 @@ export default function MovieDetails(props) {
           <Button id='modal-close-button' onClick={props.closeModal} variant='danger'>X</Button>
           <div id='modal-details-main'>
 
-            <h1>{movieData.title} ({shortenReleaseDate(movieData.release_date)}) <em>{movieData.original_title !== movieData.title ? `- ${movieData.original_title}`: null}</em></h1>
+            <h1>{movieData.title} ({shortenReleaseDate(movieData.release_date)}) <em className="subtitle">{movieData.original_title !== movieData.title ? `- ${movieData.original_title}`: null}</em></h1>
             {!movieData.tagline ? null : <h5>&quot; {movieData.tagline} &quot;</h5>}
             <h3 className='overview'>Overview:</h3>
             <p id='overview-text'>{movieData.overview}</p>
