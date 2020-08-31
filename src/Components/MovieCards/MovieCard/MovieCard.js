@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card,Button} from 'react-bootstrap';
 
 const MovieCard = props => {
+
+  let moviesArr;
+
+  const searchMovie = async () => {
+    try {
+      const res = await fetch(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`)
+      moviesArr = await res.json()
+      console.log(moviesArr);
+      props.details(moviesArr)
+      props.showModal()
+
+      return true
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const ratingColorHandler = (rating) => {
     if (rating > 7) {
@@ -13,6 +29,8 @@ const MovieCard = props => {
       return "red"
     }
   }
+
+
   return (
     <Card className="card">
 
@@ -24,7 +42,7 @@ const MovieCard = props => {
 
       <Card.Body id="card-description-container">
         <Card.Text id="card-description">{props.description}</Card.Text>
-        <Button variant="primary" onClick={props.showModal}>Details</Button>
+        <Button variant="primary" onClick={searchMovie}>Details</Button>
       </Card.Body>
     </Card>
   )

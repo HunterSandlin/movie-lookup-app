@@ -19,7 +19,8 @@ class App extends Component {
       genres: '',
       searchType: '',
       sort: 'popularity.desc',
-      isModal: true
+      isModal: false,
+      details: {}
     })
 
     //Moves search input value from Navbar.js to movieCards.js
@@ -187,15 +188,20 @@ class App extends Component {
     }
   }
 
+  getDetails(details) {
+    this.setState({
+      details: details
+    })
+  }
 
 
   render() {
     return (
       <>
-        <MovieDetails isModal={this.state.isModal} closeModal={this.hideModal}/>
+        <MovieDetails isModal={this.state.isModal} closeModal={this.hideModal} movieDetails={this.state.details}/>
         <MainNav submitSearch={this.loadSearch}/>
         <Sidebar setSidebarFilters={this.setSidebarFilters} />
-        <MovieCards search={this.state.title} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort} showModal={this.showModal}/>
+        <MovieCards search={this.state.title} details={(props) => this.getDetails(props)} genres={this.state.genres} dateRange={this.state.date} ratings={this.state.rating} searchType={this.state.searchType} sort={this.state.sort} showModal={this.showModal}/>
       </>
     );
   }
