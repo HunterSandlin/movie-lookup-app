@@ -24,7 +24,6 @@ class MovieCards extends PureComponent {
 
   // Runs when state updates
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
     this.isRecommendationPage = false
     if (this.props.search !== prevProps.search) {
       console.log('searching for movie');
@@ -44,7 +43,7 @@ class MovieCards extends PureComponent {
       // this.handleScroll()
       return
 
-    } else if (this.props !== prevProps && this.props.details === prevProps.details){
+    } else if (this.props !== prevProps){
       console.log('filter has changed');
       this.setState({
         searchPage: 1,
@@ -55,7 +54,9 @@ class MovieCards extends PureComponent {
       // this.handleScroll()
       return
     }
-    this.handleScroll()
+    if (this.props.details !== prevProps.details) {
+      this.handleScroll()
+    }
   }
 
   shortenOverview(details) {

@@ -1,17 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Card,Button} from 'react-bootstrap';
-
-import placeholderMovie from './placeholderMovie.json'
-
-
-
-
 
 export default function MovieDetails(props) {
   //TODO: Has to be cahnged to the actual movie details once it's implemented
+
   const movieData = props.movieDetails
-  console.log(movieData);
-  if(movieData.genres) {
+  if(movieData.original_title) {
     const genreList = movieData.genres.map(genre => <li key={genre.id}>{genre.name}</li>)
 
     const makeTime = () => {
@@ -26,6 +20,10 @@ export default function MovieDetails(props) {
       }
       return `${hours}h ${minutes}m`
     }
+
+    // useEffect(() => {
+    //   window.scrollTo(0, 0)
+    // }, [props.MovieDetails])
 
 
     return (

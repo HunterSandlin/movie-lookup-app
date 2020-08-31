@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card,Button} from 'react-bootstrap';
 
@@ -10,7 +10,6 @@ const MovieCard = props => {
     try {
       const res = await fetch(`https://api.themoviedb.org/3/movie/${props.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`)
       moviesArr = await res.json()
-      console.log(moviesArr);
       props.details(moviesArr)
       props.showModal()
 
